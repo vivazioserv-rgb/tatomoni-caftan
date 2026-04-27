@@ -99,7 +99,7 @@ export const siteConfig: SiteConfig = {
     defaultTitle: "L'élégance marocaine, intemporelle",
     defaultSubtitle:
       "Caftans brodés main, takchitas et djellabas d'exception — pièces uniques façonnées dans la tradition des maîtres artisans de Fès et Rabat.",
-    defaultImageUrl: "/caftan-hero.jpg",
+    defaultImageUrl: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1600&auto=format&fit=crop&q=90",
   },
 
   contact: {

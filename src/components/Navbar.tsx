@@ -1,12 +1,24 @@
 "use client";
 import Link from "next/link";
 import { useCart } from "@/context/CartProvider";
+import { useLocale } from "@/context/LocaleProvider";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
+import { TKey } from "@/lib/i18n";
 import { ShoppingBag, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { siteConfig } from "@/site.config";
 
+const LINK_KEYS: Record<string, TKey> = {
+  "/": "home",
+  "/catalogue": "collection",
+  "/sur-mesure": "customOrder",
+  "/a-propos": "about",
+  "/contact": "contact",
+};
+
 export default function Navbar({ brandName = siteConfig.brand.name }: { brandName?: string }) {
   const { cartCount, setCartOpen } = useCart();
+  const { t } = useLocale();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const links = siteConfig.navbar.links.filter((l) => {
@@ -33,6 +45,7 @@ export default function Navbar({ brandName = siteConfig.brand.name }: { brandNam
               src={siteConfig.brand.logoUrl}
               alt={brandName}
               className="h-20 w-auto object-contain md:h-24"
+              style={{ mixBlendMode: "multiply" }}
             />
           </Link>
           <nav
@@ -41,14 +54,15 @@ export default function Navbar({ brandName = siteConfig.brand.name }: { brandNam
           >
             {links.map((l) => (
               <Link key={l.href} href={l.href} className="hover:text-[var(--primary)] transition-colors">
-                {l.label}
+                {LINK_KEYS[l.href] ? t(LINK_KEYS[l.href]) : l.label}
               </Link>
             ))}
           </nav>
           <div className="flex items-center gap-4" style={{ color: "#1a0e09" }}>
+            <LocaleSwitcher />
             <button
               onClick={() => setCartOpen(true)}
-              aria-label="Panier"
+              aria-label={t("cart")}
               className="relative hover:text-[var(--primary)]"
             >
               <ShoppingBag className="h-5 w-5" />
@@ -63,7 +77,7 @@ export default function Navbar({ brandName = siteConfig.brand.name }: { brandNam
             </button>
             <button
               onClick={() => setMobileOpen(true)}
-              aria-label="Menu"
+              aria-label={t("menu")}
               className="md:hidden hover:text-[var(--primary)]"
             >
               <Menu className="h-6 w-6" />
@@ -90,10 +104,13 @@ export default function Navbar({ brandName = siteConfig.brand.name }: { brandNam
                     className="block text-lg font-medium hover:text-[var(--primary)]"
                     style={{ color: "#1a0e09" }}
                   >
-                    {l.label}
+                    {LINK_KEYS[l.href] ? t(LINK_KEYS[l.href]) : l.label}
                   </Link>
                 ))}
               </nav>
+              <div className="mt-8 border-t pt-4" style={{ borderColor: "#d4a84b" }}>
+                <LocaleSwitcher />
+              </div>
             </aside>
           </div>
         )}

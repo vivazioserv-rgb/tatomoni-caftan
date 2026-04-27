@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartProvider";
+import { LocaleProvider } from "@/context/LocaleProvider";
 import CookieBanner from "@/components/CookieBanner";
 import { siteConfig } from "@/site.config";
 
@@ -33,10 +34,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <style dangerouslySetInnerHTML={{ __html: themeVars }} />
       </head>
       <body className="min-h-full flex flex-col">
-        <CartProvider>
-          {children}
-          <CookieBanner />
-        </CartProvider>
+        <LocaleProvider>
+          <CartProvider>
+            {children}
+            <CookieBanner />
+          </CartProvider>
+        </LocaleProvider>
       </body>
     </html>
   );
