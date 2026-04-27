@@ -16,10 +16,16 @@ export default function Navbar({ brandName = siteConfig.brand.name }: { brandNam
 
   return (
     <>
-      <div className="bg-[var(--primary)] py-2.5 text-center text-[10px] font-semibold tracking-[0.35em] text-black">
+      <div
+        className="py-2.5 text-center text-[10px] font-semibold tracking-[0.35em]"
+        style={{ backgroundColor: "#8b1e3f", color: "#faf6ef" }}
+      >
         {siteConfig.brand.banner} <span className="ml-1">{siteConfig.brand.bannerSymbol}</span>
       </div>
-      <header className="sticky top-0 z-40 border-b border-[var(--accent)] bg-black/95 backdrop-blur">
+      <header
+        className="sticky top-0 z-40 border-b backdrop-blur"
+        style={{ backgroundColor: "rgba(250, 246, 239, 0.95)", borderColor: "#d4a84b33" }}
+      >
         <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6 md:h-28">
           <Link href="/" className="flex items-center" aria-label={brandName}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -29,14 +35,17 @@ export default function Navbar({ brandName = siteConfig.brand.name }: { brandNam
               className="h-20 w-auto object-contain md:h-24"
             />
           </Link>
-          <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
+          <nav
+            className="hidden items-center gap-8 text-sm font-medium md:flex"
+            style={{ color: "#1a0e09" }}
+          >
             {links.map((l) => (
-              <Link key={l.href} href={l.href} className="hover:text-[var(--primary)]">
+              <Link key={l.href} href={l.href} className="hover:text-[var(--primary)] transition-colors">
                 {l.label}
               </Link>
             ))}
           </nav>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4" style={{ color: "#1a0e09" }}>
             <button
               onClick={() => setCartOpen(true)}
               aria-label="Panier"
@@ -44,7 +53,10 @@ export default function Navbar({ brandName = siteConfig.brand.name }: { brandNam
             >
               <ShoppingBag className="h-5 w-5" />
               {cartCount > 0 && (
-                <span className="absolute -right-2 -top-2 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-[var(--primary)] px-1 text-[10px] font-bold text-[var(--background)]">
+                <span
+                  className="absolute -right-2 -top-2 flex h-4 min-w-[16px] items-center justify-center rounded-full px-1 text-[10px] font-bold"
+                  style={{ backgroundColor: "#8b1e3f", color: "#faf6ef" }}
+                >
                   {cartCount}
                 </span>
               )}
@@ -61,10 +73,10 @@ export default function Navbar({ brandName = siteConfig.brand.name }: { brandNam
 
         {mobileOpen && (
           <div className="fixed inset-0 z-50 flex md:hidden">
-            <div className="flex-1 bg-black/70" onClick={() => setMobileOpen(false)} />
+            <div className="flex-1 bg-black/50" onClick={() => setMobileOpen(false)} />
             <aside
-              className="w-72 border-l border-[var(--accent)] p-6 shadow-2xl"
-              style={{ backgroundColor: "#0a0a0a", color: "#f5f1e8" }}
+              className="w-72 border-l p-6 shadow-2xl"
+              style={{ backgroundColor: "#faf6ef", color: "#1a0e09", borderColor: "#d4a84b" }}
             >
               <button onClick={() => setMobileOpen(false)} className="mb-6 ml-auto block">
                 <X className="h-5 w-5" />
@@ -76,6 +88,7 @@ export default function Navbar({ brandName = siteConfig.brand.name }: { brandNam
                     href={l.href}
                     onClick={() => setMobileOpen(false)}
                     className="block text-lg font-medium hover:text-[var(--primary)]"
+                    style={{ color: "#1a0e09" }}
                   >
                     {l.label}
                   </Link>
